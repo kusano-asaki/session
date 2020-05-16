@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SessionLogin</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <header>
+      <h1>SessionLogin</h1>
+        <% flash.each do |key, value| %>
+          <%= content_tag(:div, value, class: "#{key}") %>
+        <% end %>
+          <% if logged_in? %>
+          <p class="header_nav"><%= link_to "Profile", user_path(current_user.id) %></p>
+          <p class="header_nav"><%= link_to "Logout", session_path(current_user.id), method: :delete %></p>
+          <% else %>
+          <p class="header_nav"><%= link_to "Sign up", new_user_path %></p>
+          <p class="header_nav"><%= link_to "Login", new_session_path %></p>
+
+
+          <% end %>
+        <%= yield %>
+
+    </header>
+    </body>
+</html>
